@@ -1,0 +1,19 @@
+﻿{% extends "app/layout.html" %}
+
+{% block content %}
+<div class="user-container">
+<h2>Новости</h2> <br />
+
+{% for post in posts %}
+<hr />
+<div class="user-list ">
+    <div class="name-id-description">
+    <h2> {{post.title}}</h2>
+    <h4> {{post.posted}}</h4>
+    <h4> {{post.description}}</h4>
+    <p><a href="{% url 'newspost' parametr=post.id %}"> Читать далее </a> </p>
+</div>
+</div>
+</div>
+{% endfor %}
+{% endblock %}

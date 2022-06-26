@@ -1,0 +1,74 @@
+﻿{% extends "app/layout.html" %}
+
+{% block content %}
+<div class="catalog-container">
+    <h2>{{ title }}</h2> <br />
+    {% if user.is_authenticated %}
+    {% for task in tasks %}
+    <hr />
+    
+    <div class="product-container">
+        <div class="name-id-description">
+            <p> Работник: {{task.worker}}</p>
+            <p> Задание: {{task.content}}</p>
+            <p> Дата создания: {{task.created}}</p>
+            <p> Статус: {{task.done}}</p>
+        </div>
+    
+         <div class="product-right">
+            <div class="status-section-first">{% if request.user ==  task.worker %}
+              <a href="{% url 'ConfirmTask' parametr=task.id%}" class="status-change-button status-change-approve">Выполнено</a>
+              <a href="{% url 'RejectTask' parametr=task.id%}" class="status-change-button status-change-reject">Провалено</a>
+              <a href="{% url 'ResetTask' parametr=task.id%}" class="status-change-button status-change-reset">Сбросить статус</a>
+            {% endif %}</div>
+            {% if user.is_staff %}
+            <div class="status-section-second">
+              <a href="{% url 'DeleteTask' parametr=task.id%}" class="status-change-button status-change-delete">Удалить</a>
+            </div>
+             {% endif %}
+          </div>
+    </div>
+    {% endfor %}
+    {% endif %}
+</div>
+
+
+
+
+<style>
+    .status-change-button {
+            display: flex;
+            flex-direction: column;
+            flex-wrap: nowrap;
+            align-items: center;
+    }
+    .status-change-approve, .status-change-reject, .status-change-delete, .status-change-reset {
+                display: block;
+                color: #000000;
+                background-color: #f6f6f6;
+                border: 1px solid rgba(0, 0, 0, 0.3);
+                border-radius: 6px;
+                text-decoration: none;
+                text-align: center;
+                margin: 10px;
+                font-size: 18px;
+                line-height: 30px;
+                width: 200px;
+    }
+    .status-change-delete {
+    background-color: red;
+    }
+        .status-change-button:hover {
+                    color:black;
+                    cursor: pointer;
+                    text-decoration: none;
+                    background-image: linear-gradient(to top, #fc8507, #ffa218);
+                    border: 1px solid transparent;
+                    border-top-color: #fc8507;
+                    border-bottom-color: #ffa218;}
+
+    .name-id-description {
+    font-size:16px;
+    }
+</style>
+{% endblock %}

@@ -1,0 +1,18 @@
+﻿{% extends "app/layout.html" %} 
+{% block content %}
+<div class="registration-container">
+  <div class="reg-form-container">
+    <h2 class="registration-title">Регистрация</h2>
+    <form class="registration-form" method="POST">
+      {% csrf_token %}
+      <div>
+        {% for r in regform %}
+          <p><label class="form-label" for="{{ r.id_for_label }} ">{{ r.label }}</label>{{ r }}</p>
+          <div class="form-error">{{ r.errors }} </div> 
+          {% endfor %}
+        <button type="submit" class="save btn btn-default registration-button">Зарегистрировать</button>
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}

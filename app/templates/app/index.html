@@ -1,0 +1,12 @@
+{% extends "app/layout.html" %}
+
+{% block content %}
+
+ {% if not user.is_authenticated %}
+<h1>Войдите в учетную запись</h1>
+<h1>Для получения логина и пароля обратитесь к администратору</h1>
+{% endif %}
+{% if  user.is_authenticated %}
+<h2>Добро пожаловать, {{user.first_name}}</h2>
+{% endif %}
+{% endblock %}

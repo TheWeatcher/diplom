@@ -1,0 +1,24 @@
+﻿{% extends "app/layout.html" %}
+
+{% block content %}
+<div class="user-container">
+   <h2>Список пользователей</h2> 
+ 
+{% for user in users_list %}
+<div class="user-list">
+ <div class="name-id-description">  
+    <p>Пользователь:</p>
+    <p>{{user.first_name}} {{user.last_name}}</p>
+    <a href="{% url 'foreign_profile' id=user.id %}">Профиль пользователя</a> 
+    <br />
+    <hr />
+ </div>  
+{% endfor %}
+   
+ </div>  
+</div>
+{% endblock content %}
+
+
+
+

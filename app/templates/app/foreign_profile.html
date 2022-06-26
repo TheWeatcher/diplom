@@ -1,0 +1,33 @@
+﻿{% extends "app/layout.html" %} {% block content %}
+<div class="user-container">
+    <h2>Профиль</h2>
+  <div class="user-info">
+     <img class ="photo_profile" src="/media/{{ employee.employee.photo }} " ><br><br>
+    <div class="left">
+      <p>Имя пользователя</p>
+      <p>Имя</p>
+      <p>Фамилия</p>
+      <p>E-mail</p>
+      <p>Статус учетной записи</p>
+      <p>Дата регистрации</p>
+    </div>
+    <div class="right">
+
+      <p>{{employee.username}}</p>
+      <p>{{employee.first_name}}</p>
+      <p>{{employee.last_name}}</p>
+      <p>{{employee.email}}</p>
+      
+      
+      {% if user.is_active %}
+      <p>Активна</p>
+      {% else %}
+      <p>Неактивная</p>
+      {% endif %}
+      <p>{{user.date_joined}}</p>
+    </div>
+  </div>
+
+    <a href="{% url 'newconversation' username=employee.username%}" class="update-link"><div class="update-btn">Начать диалог</div></a>
+</div>
+{% endblock %}
